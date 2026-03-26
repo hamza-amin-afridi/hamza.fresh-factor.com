@@ -1,5 +1,7 @@
-# Enable rewrite engine
+# Force HTTPS
 RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Never rewrite static assets (images/css/js)
 RewriteRule ^assets/ - [L]
@@ -11,3 +13,25 @@ RewriteRule ^(.*)$ index.php [L,QSA]
 
 # Set default page
 DirectoryIndex index.php
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options SAMEORIGIN
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Hide .htaccess file
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Prevent execution in assets directory
+<Directory "assets">
+    <FilesMatch "\.(php|phtml|php3|php4|php5|pl|py|jsp|asp|sh|cgi)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</Directory>

@@ -12,11 +12,11 @@ $__host = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
 $__is_live_subdomain = ($__host === 'hamza.fresh-factor.com' || str_ends_with($__host, '.hamza.fresh-factor.com'));
 
 if (!defined('SITE_URL')) {
-    define('SITE_URL', $__is_live_subdomain ? 'https://hamza.fresh-factor.com' : '');
+    define('SITE_URL', $__is_live_subdomain ? 'https://hamza.fresh-factor.com' : 'https://hamza.fresh-factor.com');
 }
 
 if (!defined('ASSETS_BASE_URL')) {
-    define('ASSETS_BASE_URL', $__is_live_subdomain ? 'https://hamza.fresh-factor.com' : '');
+    define('ASSETS_BASE_URL', $__is_live_subdomain ? 'https://fresh-factor.com' : 'https://fresh-factor.com');
 }
 
 if (!defined('ASSETS_BASE')) {
