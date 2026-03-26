@@ -1,0 +1,13 @@
+# Enable rewrite engine
+RewriteEngine On
+
+# Never rewrite static assets (images/css/js)
+RewriteRule ^assets/ - [L]
+
+# Redirect to index.php if file/directory doesn't exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+# Set default page
+DirectoryIndex index.php
